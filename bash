@@ -1,3 +1,9 @@
+if [ $(echo -n $0) 1= "-bash" ]
+then
+  echo "Import these functions from a Bash shell only. Aborting..."
+  exit 1
+fi
+
 logstream() {
   if [ -z $1 ]; then
     echo ""
