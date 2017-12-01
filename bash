@@ -9,7 +9,7 @@ logstream() {
 }
 
 travis-tail() {
-  echo "Updating Travis gem
+  echo "Updating Travis gem"
   gem install travis
   echo "Waiting for job to begin"
   until travis status | grep started &> /dev/null
