@@ -1,14 +1,8 @@
-if [ $(echo -n $0) 1= "-bash" ]
-then
-  echo "Import these functions from a Bash shell only. Aborting..."
-  exit 1
-fi
-
 logstream() {
   if [ -z $1 ]; then
     echo ""
     echo "Stream logs from hosts in your Chef environment(s)."
-    echo "usage: logstream <development | staging | production>"
+    echo "Usage: logstream <development | staging | production>"
     echo ""
   fi
   knife ssh "chef_environment:$1" -a ipaddress "sudo journalctl --follow"
@@ -23,4 +17,15 @@ travis-tail() {
     sleep 2
   done
   travis logs
+}
+
+toml_key() {
+  if [ -z $2 ]; then
+    echo ""
+    echo "Usage: toml_key <key name> <TOML file>"
+    echo ""
+  fi
+  grep $1 $2 \
+    | awk 'BEGIN{FS=" = "}{print $2}' \
+    | awk 'BEGIN{FS="\""}{print $2}'
 }
