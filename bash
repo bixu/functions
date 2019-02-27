@@ -29,3 +29,7 @@ toml_key() {
     | awk 'BEGIN{FS=" = "}{print $2}' \
     | awk 'BEGIN{FS="\""}{print $2}'
 }
+
+function studio () {
+  hab studio enter
+}
